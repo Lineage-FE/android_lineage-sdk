@@ -912,6 +912,16 @@ public final class LineageSettings {
                 new InclusiveIntegerRangeValidator(0, 2);
 
         /**
+         * Whether to hide clock when launcher is visible
+         * default: false
+         */
+        public static final String STATUS_BAR_CLOCK_AUTO_HIDE = "status_bar_clock_auto_hide";
+
+        /** @hide */
+        public static final Validator STATUS_BAR_CLOCK_AUTO_HIDE_VALIDATOR =
+                sBooleanValidator;
+
+        /**
          * Whether the notification light will be allowed when in zen mode during downtime
          */
         public static final String ZEN_ALLOW_LIGHTS = "allow_lights";
@@ -1456,9 +1466,11 @@ public final class LineageSettings {
          * Enable looking up of phone numbers of nearby places
          * 0 = 0ff, 1 = on
          */
+        @Deprecated
         public static final String ENABLE_FORWARD_LOOKUP = "enable_forward_lookup";
 
         /** @hide */
+        @Deprecated
         public static final Validator ENABLE_FORWARD_LOOKUP_VALIDATOR =
                 sBooleanValidator;
 
@@ -1466,9 +1478,11 @@ public final class LineageSettings {
          * Enable looking up of phone numbers of people
          * 0 = 0ff, 1 = on
          */
+        @Deprecated
         public static final String ENABLE_PEOPLE_LOOKUP = "enable_people_lookup";
 
         /** @hide */
+        @Deprecated
         public static final Validator ENABLE_PEOPLE_LOOKUP_VALIDATOR =
                 sBooleanValidator;
 
@@ -1476,34 +1490,42 @@ public final class LineageSettings {
          * Enable looking up of information of phone numbers not in the contacts
          * 0 = 0ff, 1 = on
          */
+        @Deprecated
         public static final String ENABLE_REVERSE_LOOKUP = "enable_reverse_lookup";
 
         /** @hide */
+        @Deprecated
         public static final Validator ENABLE_REVERSE_LOOKUP_VALIDATOR =
                 sBooleanValidator;
 
         /**
          * The forward lookup provider to be utilized by the Dialer
          */
+        @Deprecated
         public static final String FORWARD_LOOKUP_PROVIDER = "forward_lookup_provider";
 
         /** @hide */
+        @Deprecated
         public static final Validator FORWARD_LOOKUP_PROVIDER_VALIDATOR = sAlwaysTrueValidator;
 
         /**
          * The people lookup provider to be utilized by the Dialer
          */
+        @Deprecated
         public static final String PEOPLE_LOOKUP_PROVIDER = "people_lookup_provider";
 
         /** @hide */
+        @Deprecated
         public static final Validator PEOPLE_LOOKUP_PROVIDER_VALIDATOR = sAlwaysTrueValidator;
 
         /**
          * The reverse lookup provider to be utilized by the Dialer
          */
+        @Deprecated
         public static final String REVERSE_LOOKUP_PROVIDER = "reverse_lookup_provider";
 
         /** @hide */
+        @Deprecated
         public static final Validator REVERSE_LOOKUP_PROVIDER_VALIDATOR = sAlwaysTrueValidator;
 
         /**
@@ -2071,6 +2093,15 @@ public final class LineageSettings {
                 sBooleanValidator;
 
         /**
+         * Whether auto brightness is applied one shot when screen is turned on
+         */
+        public static final String AUTO_BRIGHTNESS_ONE_SHOT = "auto_brightness_one_shot";
+
+        /** @hide */
+        public static final Validator AUTO_BRIGHTNESS_ONE_SHOT_VALIDATOR =
+                sBooleanValidator;
+
+        /**
          * Whether or not to launch default music player when headset is connected
          */
         public static final String HEADSET_CONNECT_PLAYER = "headset_connect_player";
@@ -2275,6 +2306,7 @@ public final class LineageSettings {
                     HIGH_TOUCH_SENSITIVITY_ENABLE_VALIDATOR);
             VALIDATORS.put(SYSTEM_PROFILES_ENABLED, SYSTEM_PROFILES_ENABLED_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_CLOCK, STATUS_BAR_CLOCK_VALIDATOR);
+            VALIDATORS.put(STATUS_BAR_CLOCK_AUTO_HIDE, STATUS_BAR_CLOCK_AUTO_HIDE_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_AM_PM, STATUS_BAR_AM_PM_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_BATTERY_STYLE, STATUS_BAR_BATTERY_STYLE_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_SHOW_BATTERY_PERCENT,
@@ -2411,6 +2443,7 @@ public final class LineageSettings {
                     NOTIFICATION_LIGHT_PULSE_CUSTOM_VALUES_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_LIGHT_COLOR_AUTO,
                     NOTIFICATION_LIGHT_COLOR_AUTO_VALIDATOR);
+            VALIDATORS.put(AUTO_BRIGHTNESS_ONE_SHOT, AUTO_BRIGHTNESS_ONE_SHOT_VALIDATOR);
             VALIDATORS.put(HEADSET_CONNECT_PLAYER, HEADSET_CONNECT_PLAYER_VALIDATOR);
             VALIDATORS.put(ZEN_ALLOW_LIGHTS, ZEN_ALLOW_LIGHTS_VALIDATOR);
             VALIDATORS.put(ZEN_PRIORITY_ALLOW_LIGHTS, ZEN_PRIORITY_ALLOW_LIGHTS_VALIDATOR);
@@ -2871,10 +2904,8 @@ public final class LineageSettings {
 
         /**
          * String to contain power menu actions
-         * @deprecated
          * @hide
          */
-        @Deprecated
         public static final String POWER_MENU_ACTIONS = "power_menu_actions";
 
         /**
@@ -3001,8 +3032,10 @@ public final class LineageSettings {
 
         /**
          * The hostname for this device
+         * @deprecated
          * @hide
          */
+        @Deprecated
         public static final String DEVICE_HOSTNAME = "device_hostname";
 
         /**
@@ -3706,13 +3739,17 @@ public final class LineageSettings {
         /**
          * Whether to vibrate when charger power is connected/disconnected
          * @hide
+         * @deprecated Use {@link android.provider.Settings.Secure#CHARGING_VIBRATION_ENABLED} instead
          */
+        @Deprecated
         public static final String POWER_NOTIFICATIONS_VIBRATE = "power_notifications_vibrate";
 
         /**
          * URI for power notification sounds
          * @hide
+         * @deprecated Use {@link android.provider.Settings.Global#CHARGING_STARTED_SOUND} instead
          */
+        @Deprecated
         public static final String POWER_NOTIFICATIONS_RINGTONE = "power_notifications_ringtone";
 
         /**

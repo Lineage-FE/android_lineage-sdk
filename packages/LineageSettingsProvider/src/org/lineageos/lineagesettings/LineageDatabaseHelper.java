@@ -1,6 +1,6 @@
 /**
- * Copyright (c) 2015, The CyanogenMod Project
- * Copyright (c) 2017, The LineageOS Project
+ * Copyright (C) 2015-2016 The CyanogenMod Project
+ *               2017-2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -428,22 +428,9 @@ public class LineageDatabaseHelper extends SQLiteOpenHelper{
         }
 
         if (upgradeVersion < 13) {
-            // Update custom charging sound setting
-            if (mUserHandle == UserHandle.USER_OWNER) {
-                db.beginTransaction();
-                SQLiteStatement stmt = null;
-                try {
-                    stmt = db.compileStatement("UPDATE global SET value=? WHERE name=?");
-                    stmt.bindString(1, mContext.getResources()
-                            .getString(R.string.def_power_notifications_ringtone));
-                    stmt.bindString(2, LineageSettings.Global.POWER_NOTIFICATIONS_RINGTONE);
-                    stmt.execute();
-                    db.setTransactionSuccessful();
-                } finally {
-                    if (stmt != null) stmt.close();
-                    db.endTransaction();
-                }
-            }
+            /* Was used to migrate LineageSettings.Global.POWER_NOTIFICATIONS_RINGTONE,
+             * but this setting has been deprecated
+             */
             upgradeVersion = 13;
         }
 
@@ -552,6 +539,9 @@ public class LineageDatabaseHelper extends SQLiteOpenHelper{
             loadBooleanSetting(stmt, LineageSettings.Secure.LOCKSCREEN_VISUALIZER_ENABLED,
                     R.bool.def_lockscreen_visualizer);
 
+            loadBooleanSetting(stmt, LineageSettings.Secure.VOLUME_PANEL_ON_LEFT,
+                    R.bool.def_volume_panel_on_left);
+
             loadStringSetting(stmt,
                     LineageSettings.Secure.PROTECTED_COMPONENT_MANAGERS,
                     R.string.def_protected_component_managers);
@@ -587,15 +577,6 @@ public class LineageDatabaseHelper extends SQLiteOpenHelper{
             loadBooleanSetting(stmt, LineageSettings.System.SYSTEM_PROFILES_ENABLED,
                     R.bool.def_profiles_enabled);
 
-            loadIntegerSetting(stmt, LineageSettings.System.ENABLE_FORWARD_LOOKUP,
-                    R.integer.def_forward_lookup);
-
-            loadIntegerSetting(stmt, LineageSettings.System.ENABLE_PEOPLE_LOOKUP,
-                    R.integer.def_people_lookup);
-
-            loadIntegerSetting(stmt, LineageSettings.System.ENABLE_REVERSE_LOOKUP,
-                    R.integer.def_reverse_lookup);
-
             loadBooleanSetting(stmt, LineageSettings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE,
                     R.bool.def_notification_pulse_custom_enable);
 
@@ -623,18 +604,6 @@ public class LineageDatabaseHelper extends SQLiteOpenHelper{
             stmt = db.compileStatement("INSERT OR IGNORE INTO global(name,value)"
                     + " VALUES(?,?);");
             // Global
-            loadBooleanSetting(stmt,
-                    LineageSettings.Global.POWER_NOTIFICATIONS_ENABLED,
-                    R.bool.def_power_notifications_enabled);
-
-            loadBooleanSetting(stmt,
-                    LineageSettings.Global.POWER_NOTIFICATIONS_VIBRATE,
-                    R.bool.def_power_notifications_vibrate);
-
-            loadStringSetting(stmt,
-                    LineageSettings.Global.POWER_NOTIFICATIONS_RINGTONE,
-                    R.string.def_power_notifications_ringtone);
-
             loadIntegerSetting(stmt, LineageSettings.Global.WEATHER_TEMPERATURE_UNIT,
                     R.integer.def_temperature_unit);
         } finally {
